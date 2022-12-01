@@ -9,6 +9,7 @@ def main():
     
     #chapter3()
     
+    
 
 
     
@@ -42,6 +43,11 @@ def chapter1():
 
     print("oneAway")
     print(oneAway("pale", "pales"))
+    
+    print()
+    
+    print("StringCompression")
+    print(stringCompression("aabcccccaaa"))
     
        
 def isUnique(string):
@@ -114,6 +120,29 @@ def oneAway(str1, str2):
     else:
         return False
                 
+def stringCompression(string):
+    #compress strings back to back 
+    compressed = []
+    counter = 0
+    
+    for i in range(len(string)):
+        if i != 0 and (string[i] != string[i-1]):
+            compressed.append(string[i - 1] + str(counter))
+            counter = 0
+        counter += 1
+        
+    if counter: 
+        compressed.append(string[-1] + str(counter))
+        
+    final_compressed = ""
+    for things in compressed:
+        final_compressed =  final_compressed + things
+    
+    if len(final_compressed) >= len(string):
+        return string
+    else:
+        return final_compressed
+
 # Chapter 1
 
 
@@ -243,11 +272,7 @@ def chapter3():
 
 
 # Chapter 3 
-    
-    
-    
-        
-        
+
 
 if __name__ == "__main__":
     main()
