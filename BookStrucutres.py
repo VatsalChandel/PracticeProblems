@@ -3,11 +3,11 @@ from myStructures import *  # For LinkedList
 
 
 def main():
-    #chapter1()
+    chapter1()
     
     #chapter2()
     
-    chapter3()
+    #chapter3()
     
 
 
@@ -15,15 +15,34 @@ def main():
     
 # Chapter 1
 def chapter1(): 
+    print("IsUnique")
     temp_string = "hello"
     print(isUnique(temp_string))
     
+    print()
+
+    print("isPermutation")
     a = "Hello"
     b = "Holel"
     print(isPermutation(a, b))
     
+    print()
+
+    print("URLify")
     url = "Hello World"
     print(URLify(url))
+    
+    print()
+
+    print("PalindromePermutation")
+    perm = "Kayak"
+    print(palindromePermutation(perm))
+    
+    print()
+
+    print("oneAway")
+    print(oneAway("pale", "pales"))
+    
        
 def isUnique(string):
     temp_dictionary = {}
@@ -46,6 +65,55 @@ def isPermutation(a, b):
 
 def URLify(url): 
     return url.replace(' ', '%20')
+
+def palindromePermutation(str):
+    str = str.lower()
+    str = str.replace(' ', '')
+    
+    letter_dict = {}
+    
+    for letters in str:
+        if letters in letter_dict:
+            letter_dict[letters] += 1
+        else:
+            letter_dict[letters] = 1
+    odd = 0
+    for k,v in letter_dict.items():
+        if letter_dict[k] % 2 != 0 and odd == 0:
+            odd += 1
+        elif letter_dict[k] % 2 != 0 and odd != 0:
+            return False
+    return True
+     
+def oneAway(str1, str2):
+    #Remove, replace, insert
+    if str1 == str2:
+        return True
+    
+    elif len(str1) == len(str2):
+        
+        changed = False
+        for c1,c2 in zip(str1,str2):
+            if c1 != c2:
+                if changed:
+                    return False
+                changed = True 
+        return True 
+    elif (len(str1) + 1 == len(str2)) or (len(str1) -1 == len(str2)):
+        i,j = 0,0
+        changed = False
+        while i < len(str1) and j < len(str2):
+            if str1[i] != str2[j]:
+                if changed:
+                    return False
+                changed = True 
+            else:
+                i += 1
+                j += 1
+        return True
+    else:
+        return False
+                
 # Chapter 1
 
 
