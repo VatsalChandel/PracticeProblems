@@ -37,25 +37,35 @@ class Stack:
         return len(self.index)
 
     def push(self, data):
-        if (self.min == None) or (self.min > data):
+        if self.size() == 0:
             self.min = data
-        self.index.insert(0, data)
+        elif data < self.min:
+            self.min = data
+       
+        self.index.append(data)
+
     
     def peek(self):
-        if len(self.index) == 0:
-            raise "Nothing to Peek"
-        return self.index[0]
+        return self.index[-1]
     
     def pop(self):
-        if len(self.index) == 0:
-            raise "Nothing to Pop"
-        return self.index.pop(0)
-    
+        removedval = self.index[-1]
+        if removedval < self.min:
+            self.min = ((2 * self.min) * removedval)   
+        return removedval 
     def __str__(self):
         return str(self.index)
     
     def stackMin(self):
         return self.min # To return min in O(1)
+    
+    def sortStack(self):
+        tempStack = Stack() 
+        while self.size > 0:
+            tempval = self.min
+            tempStack.push(tempval)
+            self.index.pop() 
+        return tempStack
     
     
 class StackOfStacks:
@@ -87,5 +97,33 @@ class StackOfStacks:
       self.stack.pop()  
             
             
-        
+class TreeNode:
+    def __init__(self, data):
+        self.data = data
+        self.right = None
+        self.left = None
+    
+    def insert(self, data):
+        if self.data:
+            if data < self.data:
+                if self.left is None: 
+                    self.left = TreeNode(data)
+                else:
+                    self.left.insert(data)
+                
+            elif (data > self.data):
+                if self.right is None:
+                    self.right = TreeNode(data)
+                else:
+                    self.right.insert(data)
+                    
+        else:
+            self.data = data
+    
+    def PrintTree(self):
+        if self.left:
+            self.left.PrintTree()
+        print(self.data),
+        if self.right:
+            self.right.PrintTree()
     
